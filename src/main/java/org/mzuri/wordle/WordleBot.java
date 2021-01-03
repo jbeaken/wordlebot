@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,22 +17,22 @@ import java.util.stream.IntStream;
 @Slf4j
 class WordleBot {
 
-    String wordToGuess;
+    private final String wordToGuess;
 
     static String guessSeed = "roate";
 
-    static String path = "/home/git/mzuri/wordle/src/main/resources/words.txt";
-
-    List<String> words;
+    private List<String> words;
 
     int noOfGuessesAllowed = 10;
 
 
     public WordleBot(String wordToGuess) {
+        final URL resource = this.getClass().getClassLoader().getResource("words.txt");
+
         this.wordToGuess = wordToGuess;
         try {
-            words = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
-        } catch (IOException e) {
+            words = Files.readAllLines(Paths.get(resource.toURI()), StandardCharsets.UTF_8);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
