@@ -37,33 +37,33 @@ class WordleBot {
         }
     }
 
-    void guess() {
+    String guess() {
         String guessedWord = guessSeed;
 
-        IntStream.range(0, noOfGuessesAllowed).forEach(noOfGuesses -> {
-
-        });
-
-        for(int i = 1; i <= noOfGuessesAllowed; i++) {
+g        for(int i = 1; i <= noOfGuessesAllowed; i++) {
             log.info("Guessing word {}, size of words is {}", guessedWord,  words.size());
 
-            isCorrectAnswer(guessedWord, i);
+            if(isCorrectAnswer(guessedWord)) {
+                log.info("Got it in {}! It's {}", i, guessedWord);
+                return guessedWord;
+            }
 
             guess(guessedWord);
 
-            //Just get first word in new list
-            guessedWord = words.get(0);
+            guessedWord = getNextWordToGuess();
         }
 
         log.info("Why o why? Haven't guessed it");
         log.info("List of words remaining : {}", words);
     }
 
-    private void isCorrectAnswer(String guessedWord, int noOfGuesses) {
-        if(guessedWord.equals(this.wordToGuess)) {
-            log.info("Got it in {}! It's {}", noOfGuesses, guessedWord);
-            System.exit(0);
-        }
+    private String getNextWordToGuess() {
+        //Just get first word in list (for now!)
+        return words.get(0);
+    }
+
+    private boolean isCorrectAnswer(String guessedWord) {
+        return guessedWord.equals(this.wordToGuess);
     }
 
     void guess(String guessedWord) {
