@@ -41,7 +41,7 @@ class WordleBot {
     WordleResult guess() {
 
         String guessedWord = seedGuess;
-        WordleResult wordleResult = new WordleResult("bollocks!", -1);
+        WordleResult wordleResult = new WordleResult("Why o why? Haven't guessed it!", -1);
 
         for (int noOfGuesses = 1; noOfGuesses <= noOfGuessesAllowed; noOfGuesses++) {
             log.info("Guessing word {}, size of words is {}", guessedWord, words.size());
@@ -50,15 +50,13 @@ class WordleBot {
                 log.info("Got it in {}! It's {}", noOfGuesses, guessedWord);
                 wordleResult.setGuessedWord(guessedWord);
                 wordleResult.setNoOfGuesses(noOfGuesses);
+                break;
             }
 
             guess(guessedWord);
 
             guessedWord = getNextWordToGuess();
         }
-
-        log.info("Why o why? Haven't guessed it");
-        log.info("List of words remaining : {}", words);
 
         return wordleResult;
     }

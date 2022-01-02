@@ -23,6 +23,8 @@ class WordleApplication {
         log.info("Bot ready for wordle action");
 
         //Do it
-        wordleBot.guess();
+        final WordleResult wordleResult = wordleBot.guess();
+
+        log.info("result : {}", wordleResult);
     }
 }
