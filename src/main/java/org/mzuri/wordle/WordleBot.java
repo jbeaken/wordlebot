@@ -16,13 +16,10 @@ import java.util.stream.Collectors;
 @Slf4j
 class WordleBot {
 
-    private final String wordToGuess;
-
     static String guessSeed = "roate";
-
-    private List<String> words;
-
+    private final String wordToGuess;
     int noOfGuessesAllowed = 10;
+    private List<String> words;
 
 
     public WordleBot(String wordToGuess) {
@@ -39,10 +36,10 @@ class WordleBot {
     String guess() {
         String guessedWord = guessSeed;
 
-g        for(int i = 1; i <= noOfGuessesAllowed; i++) {
-            log.info("Guessing word {}, size of words is {}", guessedWord,  words.size());
+        for (int i = 1; i <= noOfGuessesAllowed; i++) {
+            log.info("Guessing word {}, size of words is {}", guessedWord, words.size());
 
-            if(isCorrectAnswer(guessedWord)) {
+            if (isCorrectAnswer(guessedWord)) {
                 log.info("Got it in {}! It's {}", i, guessedWord);
                 return guessedWord;
             }
@@ -70,13 +67,13 @@ g        for(int i = 1; i <= noOfGuessesAllowed; i++) {
         List<Result> results = new ArrayList<>();
 
         //Find if characters in new word
-        for(int i = 0; i < guessedWord.length(); i++) {
+        for (int i = 0; i < guessedWord.length(); i++) {
 
             final char c = guessedWord.charAt(i);
 
-            if( this.wordToGuess.indexOf(c) != -1) {
+            if (this.wordToGuess.indexOf(c) != -1) {
                 //is it exact?
-                if(this.wordToGuess.charAt( i ) == guessedWord.charAt( i )) {
+                if (this.wordToGuess.charAt(i) == guessedWord.charAt(i)) {
                     results.add(new IsPresentResult(c, i, true));
                 } else {
                     results.add(new IsPresentResult(c, i, false));
@@ -93,18 +90,18 @@ g        for(int i = 1; i <= noOfGuessesAllowed; i++) {
 
     private boolean isViableWord(String wordInDictionary, List<Result> results) {
 
-        for(Result result : results) {
+        for (Result result : results) {
 
-            switch(result) {
+            switch (result) {
                 case IsPresentResult r:
-                    if (r.isExact){
-                       if(wordInDictionary.charAt(r.pos) != r.c)  return false;
+                    if (r.isExact) {
+                        if (wordInDictionary.charAt(r.pos) != r.c) return false;
                     } else {
-                        if (wordInDictionary.indexOf(r.c) == -1)  return false;
+                        if (wordInDictionary.indexOf(r.c) == -1) return false;
                     }
                     break;
                 case IsAbsentResult r:
-                    if (wordInDictionary.indexOf(r.c) != -1)  return false;
+                    if (wordInDictionary.indexOf(r.c) != -1) return false;
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + result);
@@ -125,7 +122,7 @@ g        for(int i = 1; i <= noOfGuessesAllowed; i++) {
     }
 
     @Data
-    @EqualsAndHashCode(callSuper=false)
+    @EqualsAndHashCode(callSuper = false)
     class IsPresentResult extends Result {
         int pos;
         boolean isExact;
@@ -138,7 +135,7 @@ g        for(int i = 1; i <= noOfGuessesAllowed; i++) {
     }
 
     @Data
-    @EqualsAndHashCode(callSuper=false)
+    @EqualsAndHashCode(callSuper = false)
     class IsAbsentResult extends Result {
 
         public IsAbsentResult(char c) {
