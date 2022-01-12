@@ -51,6 +51,8 @@ class WordleBot {
 
         log.info("Why o why? Haven't guessed it");
         log.info("List of words remaining : {}", words);
+
+        return "rubbish!";
     }
 
     private String getNextWordToGuess() {
