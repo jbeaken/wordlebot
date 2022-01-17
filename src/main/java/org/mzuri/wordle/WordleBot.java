@@ -16,16 +16,21 @@ import java.util.stream.Collectors;
 @Slf4j
 class WordleBot {
 
-    static String guessSeed = "roate";
     private final String wordToGuess;
+
     int noOfGuessesAllowed = 10;
+
     private List<String> words;
 
+    private final String seedGuess;
 
-    public WordleBot(String wordToGuess) {
+
+    public WordleBot(String wordToGuess, String seedGuess) {
         final URL resource = this.getClass().getClassLoader().getResource("words.txt");
 
         this.wordToGuess = wordToGuess;
+        this.seedGuess = seedGuess;
+
         try {
             words = Files.readAllLines(Paths.get(resource.toURI()), StandardCharsets.UTF_8);
         } catch (Exception e) {
@@ -34,7 +39,8 @@ class WordleBot {
     }
 
     String guess() {
-        String guessedWord = guessSeed;
+
+        String guessedWord = seedGuess;
 
         for (int i = 1; i <= noOfGuessesAllowed; i++) {
             log.info("Guessing word {}, size of words is {}", guessedWord, words.size());
