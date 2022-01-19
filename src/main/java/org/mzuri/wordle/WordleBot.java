@@ -38,16 +38,18 @@ class WordleBot {
         }
     }
 
-    String guess() {
+    WordleResult guess() {
 
         String guessedWord = seedGuess;
+        WordleResult wordleResult = new WordleResult("bollocks!", -1);
 
-        for (int i = 1; i <= noOfGuessesAllowed; i++) {
+        for (int noOfGuesses = 1; noOfGuesses <= noOfGuessesAllowed; noOfGuesses++) {
             log.info("Guessing word {}, size of words is {}", guessedWord, words.size());
 
             if (isCorrectAnswer(guessedWord)) {
-                log.info("Got it in {}! It's {}", i, guessedWord);
-                return guessedWord;
+                log.info("Got it in {}! It's {}", noOfGuesses, guessedWord);
+                wordleResult.setGuessedWord(guessedWord);
+                wordleResult.setNoOfGuesses(noOfGuesses);
             }
 
             guess(guessedWord);
@@ -58,7 +60,7 @@ class WordleBot {
         log.info("Why o why? Haven't guessed it");
         log.info("List of words remaining : {}", words);
 
-        return "rubbish!";
+        return wordleResult;
     }
 
     private String getNextWordToGuess() {

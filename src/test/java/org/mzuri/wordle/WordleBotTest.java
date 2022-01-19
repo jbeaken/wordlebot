@@ -9,11 +9,11 @@ class WordleBotTest {
 
     @BeforeEach
     void beforeEach() {
-        wordleBot = new WordleBot("spike");
+        wordleBot = new WordleBot("spike", "roate");
     }
 
     @Test
     void testGuessWord() {
-        wordleBot.guess(WordleBot.guessSeed);
+        wordleBot.guess();
     }
 }
