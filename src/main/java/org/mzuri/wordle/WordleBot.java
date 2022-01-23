@@ -26,15 +26,15 @@ class WordleBot {
 
 
     public WordleBot(String wordToGuess, String seedGuess) {
-        final URL resource = this.getClass().getClassLoader().getResource("words.txt");
+        final URL wordFileURL = this.getClass().getClassLoader().getResource("words.txt");
 
         this.wordToGuess = wordToGuess;
         this.seedGuess = seedGuess;
 
         try {
-            words = Files.readAllLines(Paths.get(resource.toURI()), StandardCharsets.UTF_8);
+            words = Files.readAllLines(Paths.get(wordFileURL.toURI()), StandardCharsets.UTF_8);
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("Cannot load words", e);
         }
     }
 
