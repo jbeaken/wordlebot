@@ -13,5 +13,5 @@ where wordToGuess is the solution to the wordle and seedGuess is the first guess
 
 ### Examples
 ```gradle run --args="spike"``` \
-```gradle run --args="block"```
+```gradle run --args="block"``` \
 ```gradle run --args="block aurie"```
