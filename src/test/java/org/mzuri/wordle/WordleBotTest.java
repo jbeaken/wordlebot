@@ -1,5 +1,6 @@
 package org.mzuri.wordle;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,6 +15,9 @@ class WordleBotTest {
 
     @Test
     void testGuessWord() {
-        wordleBot.guess();
+        final WordleResult wordleResult = wordleBot.guess();
+
+        Assertions.assertThat(wordleResult.getGuessedWord()).isEqualTo("spike");
+        Assertions.assertThat(wordleResult.getNoOfGuesses()).isEqualTo(4);
     }
 }
