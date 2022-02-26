@@ -83,10 +83,10 @@ class WordleBot {
             }
         }
 
-        words = words.stream().filter(w -> isViableGuess(w, results, guessedWord)).collect(Collectors.toList());
+        words = words.stream().filter(w -> isViableGuess(w, results) && !w.equals(guessedWord)).collect(Collectors.toList());
     }
 
-    private boolean isViableGuess(String word, List<Result> results, String guessedWord) {
+    private boolean isViableGuess(String word, List<Result> results) {
 
         for(Result result : results) {
 
@@ -102,9 +102,6 @@ class WordleBot {
                     return false;
                 }
             }
-
-            //remove self
-            if(word.equals(guessedWord)) return false;
         }
 
         return true;
