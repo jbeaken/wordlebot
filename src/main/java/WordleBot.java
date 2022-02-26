@@ -9,59 +9,71 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 class WordleBot {
 
-    String wordToGuess = "spill";
+    String wordToGuess;
+
+    String guessSeed = "roate";
+
+    static String path = "/home/git/mzuri/wordle/src/main/resources/words.txt";
+
     List<String> words;
-    int noOfGuessesAllowed = 60;
 
-    public static void main(String[] args) {
-        String path = "/home/git/mzuri/wordle/src/main/resources/words.txt";
+    int noOfGuessesAllowed = 10;
 
-        WordleBot wordleBot = new WordleBot();
-
+    public WordleBot(String wordToGuess) {
+        this.wordToGuess = wordToGuess;
         try {
-            wordleBot.words = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
+            words = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
-        //6 tries, first guess is my favourite roate
-        String guess = "roate";
+    void guess() {
+        String guessedWord = guessSeed;
 
-        for(int i = 1; i <= wordleBot.noOfGuessesAllowed; i++) {
-            log.info("Guessing word {}", guess);
-            wordleBot.guess(guess, i);
-            guess = wordleBot.words.get(0);
-            log.info("Words size = {}", wordleBot.words.size());
+        IntStream.range(0, noOfGuessesAllowed).forEach(noOfGuesses -> {
+
+        });
+
+        for(int i = 1; i <= noOfGuessesAllowed; i++) {
+            log.info("Guessing word {}, size of words is {}", guessedWord,  words.size());
+
+            isCorrectAnswer(guessedWord, i);
+
+            guess(guessedWord);
+
+            //Just get first word in new list
+            guessedWord = words.get(0);
         }
 
         log.info("Why o why? Haven't guessed it");
-        log.info("List of words remaining : {}", wordleBot.words);
-
+        log.info("List of words remaining : {}", words);
     }
 
-    void guess(String guess, int noOfGuesses) {
-
-        //check
-        if(guess.equals(wordToGuess)) {
-            log.info("Got it in {}! It's {}", noOfGuesses, guess);
+    private void isCorrectAnswer(String guessedWord, int noOfGuesses) {
+        if(guessedWord.equals(this.wordToGuess)) {
+            log.info("Got it in {}! It's {}", noOfGuesses, guessedWord);
             System.exit(0);
         }
+    }
+
+    void guess(String guessedWord) {
 
         List<Result> results = new ArrayList<>();
-        List<String> newList = null;
 
         //Find if characters in new word
-        for(int i = 0; i < guess.length(); i++) {
+        for(int i = 0; i < guessedWord.length(); i++) {
 
-            final char c = guess.charAt(i);
+            final char c = guessedWord.charAt(i);
 
-            if( wordToGuess.indexOf(c) != -1) {
+            if( this.wordToGuess.indexOf(c) != -1) {
                 //is it exact?
-                if(wordToGuess.charAt( i ) == guess.charAt( i)) {
+                if(this.wordToGuess.charAt( i ) == guessedWord.charAt( i)) {
                     results.add(new Result(c, i, true, true));
                 } else {
                     results.add(new Result(c, i, false, true));
@@ -71,12 +83,10 @@ class WordleBot {
             }
         }
 
-        newList = words.stream().filter(w -> isViableGuess(w, results)).collect(Collectors.toList());
-
-        words = newList;
+        words = words.stream().filter(w -> isViableGuess(w, results, guessedWord)).collect(Collectors.toList());
     }
 
-    private boolean isViableGuess(String word, List<Result> results) {
+    private boolean isViableGuess(String word, List<Result> results, String guessedWord) {
 
         for(Result result : results) {
 
@@ -87,7 +97,10 @@ class WordleBot {
                     }
                 }
 
-                if (word.indexOf(result.c) == -1) {
+                final int indexOf = word.indexOf(result.c);
+
+                if (indexOf == -1) {
+                    //Also check it's not in one of the result exact positions
                     return false;
                 }
             } else {
@@ -96,6 +109,9 @@ class WordleBot {
                     return false;
                 }
             }
+
+            //remove self
+            if(word.equals(guessedWord)) return false;
         }
 
         return true;
