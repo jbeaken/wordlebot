@@ -96,13 +96,6 @@ class WordleBot {
                         return false;
                     }
                 }
-
-                final int indexOf = word.indexOf(result.c);
-
-                if (indexOf == -1) {
-                    //Also check it's not in one of the result exact positions
-                    return false;
-                }
             } else {
                 //Character not present, remove from list if it's there
                 if (word.indexOf(result.c) != -1) {
