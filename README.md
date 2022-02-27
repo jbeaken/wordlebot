@@ -1,10 +1,3 @@
-<!--
-Find and replace all these
-project_name: your project name
-github_username: your github username
-github_repo_link: your repo link
-and remove all the comments and also rename this file to README.md
- -->
 
 <div align="center">
 
@@ -13,33 +6,33 @@ and remove all the comments and also rename this file to README.md
 
 </div>
 
-<h1 align="center">project_name</h1>
+<h1 align="center">Wordle Bot</h1>
 
  <p align="center">
  	<!-- Add your tagline or very short intro of your project -->
 	Your project tagline/short description here
     <br />
 	<!-- Add your project live demo link here -->
-    <a href="https://github.com/github_username/github_repo_link">View Demo</a>
+    <a href="https://github.com/beakenj/wordlebot">View Demo</a>
     ·
 	<!-- Add you issue link here -->
-    <a href="https://github.com/github_username/github_repo_link/issues">Report Bug</a>
+    <a href="https://github.com/beakenj/wordlebot/issues">Report Bug</a>
     ·
 	<!-- Add you issue/discussion link here too -->
-    <a href="https://github.com/github_username/github_repo_link/issues">Request Feature</a>
+    <a href="https://github.com/beakenj/wordlebot/issues">Request Feature</a>
   </p>
 
 <div align="center">
 
 <!-- Use Shields website (link in acknowledgement section) to generate these for your repo or just replace the links here with yours -->
 
-[![Status](https://img.shields.io/badge/project_name-Live-success?style=for-the-badge)](https://your-live-project-link.com)
+[![Status](https://img.shields.io/badge/Wordle Bot-Live-success?style=for-the-badge)](https://your-live-project-link.com)
 ![Status](https://img.shields.io/badge/status-active-success.svg?style=for-the-badge)
-[![GitHub issues](https://img.shields.io/github/issues/github_username/github_repo_link?style=for-the-badge)](https://github.com/github_username/github_repo_link/issues)
-[![GitHub forks](https://img.shields.io/github/forks/github_username/github_repo_link?style=for-the-badge)](https://github.com/github_username/github_repo_link/network)
-[![GitHub stars](https://img.shields.io/github/stars/github_username/github_repo_link?style=for-the-badge)](https://github.com/github_username/github_repo_link/stargazers)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/github_username/github_repo_link?style=for-the-badge)
-[![GitHub license](https://img.shields.io/github/license/github_username/github_repo_link?style=for-the-badge)](https://github.com/github_username/github_repo_link)
+[![GitHub issues](https://img.shields.io/github/issues/beakenj/wordlebot?style=for-the-badge)](https://github.com/beakenj/wordlebot/issues)
+[![GitHub forks](https://img.shields.io/github/forks/beakenj/wordlebot?style=for-the-badge)](https://github.com/beakenj/wordlebot/network)
+[![GitHub stars](https://img.shields.io/github/stars/beakenj/wordlebot?style=for-the-badge)](https://github.com/beakenj/wordlebot/stargazers)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/beakenj/wordlebot?style=for-the-badge)
+[![GitHub license](https://img.shields.io/github/license/beakenj/wordlebot?style=for-the-badge)](https://github.com/beakenj/wordlebot)
 
 </div>
 
@@ -76,7 +69,7 @@ About your project
 
 ## 🏁Getting Started
 
-These instructions will help you to setup your own copy of project_name on your local machine for development and testing purposes. See [deployment](#Deployment) for notes on how to deploy the project on a live system.
+These instructions will help you to setup your own copy of Wordle Bot on your local machine for development and testing purposes. See [deployment](#Deployment) for notes on how to deploy the project on a live system.
 
 ### 📚Prerequisite
 
