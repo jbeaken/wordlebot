@@ -1,26 +1,12 @@
 
-<div align="center">
-
-<!-- Add your project logo if you have any -->
-<img width=200px height=200px src="" alt="Project logo">
-
-</div>
 
 <h1 align="center">Wordle Bot</h1>
 
  <p align="center">
  	<!-- Add your tagline or very short intro of your project -->
-	Your project tagline/short description here
+	Wordle Bot which solves wordle problems
     <br />
-	<!-- Add your project live demo link here -->
-    <a href="https://github.com/beakenj/wordlebot">View Demo</a>
-    ·
-	<!-- Add you issue link here -->
-    <a href="https://github.com/beakenj/wordlebot/issues">Report Bug</a>
-    ·
-	<!-- Add you issue/discussion link here too -->
-    <a href="https://github.com/beakenj/wordlebot/issues">Request Feature</a>
-  </p>
+</p>
 
 <div align="center">
 
