@@ -1,5 +1,8 @@
-import lombok.AllArgsConstructor;
+package org.mzuri.wordle;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
@@ -74,33 +77,37 @@ class WordleBot {
             if( this.wordToGuess.indexOf(c) != -1) {
                 //is it exact?
                 if(this.wordToGuess.charAt( i ) == guessedWord.charAt( i)) {
-                    results.add(new Result(c, i, true, true));
+                    results.add(new IsPresentResult(c, i, true));
                 } else {
-                    results.add(new Result(c, i, false, true));
+                    results.add(new IsPresentResult(c, i, false));
                 }
             } else {
-                results.add(new Result(c, -1, false, false));
+                results.add(new IsAbsentResult(c));
             }
         }
 
-        words = words.stream().filter(w -> isViableGuess(w, results) && !w.equals(guessedWord)).collect(Collectors.toList());
+        words = words.stream()
+                .filter(wordInDictionary -> isViableWord(wordInDictionary, results) && !wordInDictionary.equals(guessedWord))
+                .collect(Collectors.toList());
     }
 
-    private boolean isViableGuess(String word, List<Result> results) {
+    private boolean isViableWord(String wordInDictionary, List<Result> results) {
 
         for(Result result : results) {
 
-            if(result.isPresent()) {
-                if (result.isExact) {
-                    if (word.charAt(result.pos) != result.c) {
-                        return false;
+            switch(result) {
+                case IsPresentResult r:
+                    if (r.isExact){
+                       if(wordInDictionary.charAt(r.pos) != r.c)  return false;
+                    } else {
+                        if (wordInDictionary.indexOf(r.c) == -1)  return false;
                     }
-                }
-            } else {
-                //Character not present, remove from list if it's there
-                if (word.indexOf(result.c) != -1) {
-                    return false;
-                }
+                    break;
+                case IsAbsentResult r:
+                    if (wordInDictionary.indexOf(r.c) != -1)  return false;
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + result);
             }
         }
 
@@ -108,11 +115,34 @@ class WordleBot {
     }
 
     @Data
-    @AllArgsConstructor
-    class Result {
+    @NoArgsConstructor
+    abstract class Result {
         char c;
+
+        public Result(char c) {
+            this.c = c;
+        }
+    }
+
+    @Data
+    @EqualsAndHashCode(callSuper=false)
+    class IsPresentResult extends Result {
         int pos;
         boolean isExact;
-        boolean present;
+
+        public IsPresentResult(char c, int pos, boolean isExact) {
+            super(c);
+            this.pos = pos;
+            this.isExact = isExact;
+        }
+    }
+
+    @Data
+    @EqualsAndHashCode(callSuper=false)
+    class IsAbsentResult extends Result {
+
+        public IsAbsentResult(char c) {
+            super(c);
+        }
     }
 }
