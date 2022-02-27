@@ -19,13 +19,14 @@ class WordleBot {
 
     String wordToGuess;
 
-    String guessSeed = "roate";
+    static String guessSeed = "roate";
 
     static String path = "/home/git/mzuri/wordle/src/main/resources/words.txt";
 
     List<String> words;
 
     int noOfGuessesAllowed = 10;
+
 
     public WordleBot(String wordToGuess) {
         this.wordToGuess = wordToGuess;
@@ -76,7 +77,7 @@ class WordleBot {
 
             if( this.wordToGuess.indexOf(c) != -1) {
                 //is it exact?
-                if(this.wordToGuess.charAt( i ) == guessedWord.charAt( i)) {
+                if(this.wordToGuess.charAt( i ) == guessedWord.charAt( i )) {
                     results.add(new IsPresentResult(c, i, true));
                 } else {
                     results.add(new IsPresentResult(c, i, false));
